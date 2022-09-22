@@ -5,7 +5,9 @@ import { Container, Grid, IconButton, TextField } from '@material-ui/core';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import { HeaderBar } from './HeaderBar';
 import { addTaskAC, changeStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer } from './redusers/TasksReduser';
-import { editTodolistAC, removeTodoListAC, todoListReduser, changeFilterAC, addTodolistAC } from './redusers/TodoListReduser';
+import { editTodolistAC, removeTodoListAC, todolistsReduser, changeFilterAC, addTodolistAC } from './redusers/TodolistReduser';
+import { AppRootStateType } from './store';
+import { useSelector } from 'react-redux';
 
 
 
@@ -26,18 +28,18 @@ function App() {
     let todolistID1 = v1();
     let todolistID2 = v1();
 
-    // <Array<todolistsType>>
 
-    let [todolists, dispatchTodoList] = useReducer(todoListReduser, [
-        { id: todolistID1, title: 'What to learn', filter: 'all' },
-        { id: todolistID2, title: 'What to buy', filter: 'all' },
-    ])
 
-    const removeTodoList = (id: string) => {
-        dispatchTodoList(removeTodoListAC(id))
-        dispatchTasks(removeTodoListAC(id))
-    }
 
+
+
+
+    // let [todolists, dispatchTodoList] = useReducer(todolistsReduser, [
+    //     { id: todolistID1, title: 'What to learn', filter: 'all' },
+    //     { id: todolistID2, title: 'What to buy', filter: 'all' },
+    // ])
+
+    
     let [tasks, dispatchTasks] = useReducer(tasksReducer, {
         [todolistID1]: [
             { id: v1(), title: "HTML&CSS", isDone: true },
@@ -54,6 +56,17 @@ function App() {
             { id: v1(), title: "GraphQL2", isDone: false },
         ]
     });
+
+    todolists = useSelector < AppRootStateType, Array<todolistsType> > ( state => state.todolists)
+
+
+
+
+
+    const removeTodoList = (id: string) => {
+        dispatchTodoList(removeTodoListAC(id))
+        dispatchTasks(removeTodoListAC(id))
+    }
 
     const removeTask =(todolistID: string, id: string)=> {
 
@@ -175,58 +188,6 @@ export default App;
 
 
 
-
-export type FullType = Man1Type|Man2Type|CarType
-
-export type Man1Type = {
-   height:number
-   name:string
-}
-export type Man2Type = {
-   height:number
-   name:string
-   age:string
-}
-
-let Man1:Man1Type = { name:"Sasha", height:1.75 }
-let Man2:Man2Type = { name:"Arnold", height:1.95 , age:"18"}
-
-let car:CarType = {model:"Reno Stepway", year: 2016}
-
-
-type CarType = {
-    model : string
-    year: number 
-    // on : boolean
-    // turnOn : void
-    // rename: (model:string) => string
-}
-
-
-
-
-export type GarageType = {
-    addCar:(car:CarType)=>void
-    logAllCarsNames:()=>void
-    getAllCars:()=>Array<CarType>
-  }
-
-  let createGarage = ():GarageType => {
-    let cars:Array<CarType> = []
-
-    return {
-         addCar(car) {
-            cars.push(car)
-        },
-        logAllCarsNames() {
-            console.log ("Cars in the garage");
-            cars.forEach( c => console.log (c.model) )
-        },
-        getAllCars() {
-            return cars;
-        }
-    }
-  }
 
 
 

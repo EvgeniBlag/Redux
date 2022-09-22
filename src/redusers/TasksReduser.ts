@@ -1,9 +1,11 @@
 
 import { v1 } from "uuid";
 import { ObjTaskType } from "../Todolist"
-import { removeTodoListACType,changeFilterAC, addTodolistACType} from "./TodoListReduser";
+import { removeTodoListACType,changeFilterAC, addTodolistACType} from "./TodolistReduser";
 
-export const tasksReducer = (state: ObjTaskType, action: tsarACType): ObjTaskType => {
+export const initialState : ObjTaskType = {}
+
+export const tasksReducer = (state = initialState, action: tsarACType): ObjTaskType => {
 
    switch (action.type) {
 
@@ -56,6 +58,7 @@ export const tasksReducer = (state: ObjTaskType, action: tsarACType): ObjTaskTyp
          copyState[action.payload.todoList.id] = []
          return copyState
       }
+
 
       default: return state
   }

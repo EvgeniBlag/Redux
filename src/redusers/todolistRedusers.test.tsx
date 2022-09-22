@@ -1,7 +1,7 @@
 
 import { v1 } from "uuid"
 import { FilterValuesType, todolistsType } from "../App";
-import { addTodolistAC, changeFilterAC, editTodolistAC, removeTodoListAC, todoListReduser } from "./TodoListReduser";
+import { addTodolistAC, changeFilterAC, editTodolistAC, removeTodoListAC, todolistsReduser } from "./TodolistReduser";
 
 
 
@@ -31,8 +31,8 @@ test("Corecto eliminacion del todoList",()=>{
 
     //TestFinction2:
 
-    const endState = todoListReduser(state, removeTodoListAC(todolistId2))
-    const midleState = todoListReduser(state, removeTodoListAC(todolistId1))
+    const endState = todolistsReduser(state, removeTodoListAC(todolistId2))
+    const midleState = todolistsReduser(state, removeTodoListAC(todolistId1))
 
 
     //Test3:
@@ -60,7 +60,7 @@ test("Test para aniadir corecto TodoList y Tasks",()=>{
 
     //FunctionTest2:
 
-    const endState = todoListReduser(state, addTodolistAC(todoList))
+    const endState = todolistsReduser(state, addTodolistAC(todoList))
 
     //Test3:
 
@@ -82,7 +82,7 @@ test("Test para cambiar status , a nuestra Task",()=>{
 
    //TestFunction2:
 
-   const endState = todoListReduser (state, changeFilterAC( todolistId1,  newFilter ) )
+   const endState = todolistsReduser (state, changeFilterAC( todolistId1,  newFilter ) )
 
    //Test3:
 
@@ -102,7 +102,7 @@ test("Test para aniadir nuevo title, a nuestra Task",()=>{
 
    //TestFunction2:
 
-   let endState = todoListReduser (state, editTodolistAC (todolistId1,myNewTitle))
+   let endState = todolistsReduser (state, editTodolistAC (todolistId1,myNewTitle))
 
    //Test3:
 
