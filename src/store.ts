@@ -1,5 +1,5 @@
 import {tasksReducer} from './redusers/TasksReduser';
-import {todolistsReduser} from './redusers/TodolistReduser';
+import {todolistsReduser} from './redusers/TodoListReduser';
 import {Action, CombinedState, combineReducers, Reducer, legacy_createStore } from 'redux';
 
 // объединяя reducer-ы с помощью combineReducers,

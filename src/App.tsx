@@ -5,7 +5,7 @@ import { Container, Grid, IconButton, TextField } from '@material-ui/core';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import { HeaderBar } from './HeaderBar';
 import { addTaskAC, changeStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer } from './redusers/TasksReduser';
-import { editTodolistAC, removeTodoListAC, todolistsReduser, changeFilterAC, addTodolistAC } from './redusers/TodolistReduser';
+import { editTodolistAC, removeTodoListAC, todolistsReduser, changeFilterAC, addTodolistAC } from './redusers/TodoListReduser';
 import { AppRootStateType } from './store';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -56,40 +56,6 @@ function App() {
 
     const dispatch = useDispatch()
 
-
-
-
-
-    const removeTodoList = (id: string) => {
-        dispatch(removeTodoListAC(id))
-        dispatch(removeTodoListAC(id))
-    }
-
-    const removeTask =(todolistID: string, id: string)=> {
-
-        //   setTasks({...tasks,[todolistID]:tasks[todolistID].filter(t=>t.id != id)});
-        dispatch(removeTaskAC(todolistID, id))
-    }
-
-    const addTask = (todolistID: string, title: string) =>{
-
-        dispatch(addTaskAC(todolistID, title));
-    }
-
-    function changeStatus(todolistID: string, taskId: string, isDone: boolean) {
-        dispatch(changeStatusAC(todolistID, taskId, isDone));
-    }
-
-    function changeFilter(todolistID: string, value: FilterValuesType) {
-        // setTodolists(todolists.map(filtered=>filtered.id===todolistID ? {...filtered,filter:value}:filtered))
-        dispatch(changeFilterAC(todolistID, value))
-    }
-
-    const changeTaskTitle = (taskId: string, newTitle: string, todolistId: string) => {
-        // dispatchTasks({...tasks,[todolistId]:tasks[todolistId].map(el=>el.id===taskId?{...el,title:newTitle}:el)})
-        dispatch(changeTaskTitleAC(taskId, newTitle, todolistId))
-    }
-
     const addNewTitleTodolist = (e: ChangeEvent<HTMLInputElement>) => {
 
         setTitleTodolist(e.currentTarget.value)
@@ -107,7 +73,6 @@ function App() {
         //         { id: v1(), title: "ReactJS2", isDone: false },
         //         { id: v1(), title: "Rest API2", isDone: false },]
         // })
-        dispatch(addTodolistAC(newTodolist))
         dispatch(addTodolistAC(newTodolist))
         setTitleTodolist("")
     }
@@ -145,29 +110,12 @@ function App() {
 
                 <Grid container spacing={8} style={{ padding: "30px" }}>
                     {todolists.map((mapTodolists: todolistsType) => {
-
-                        let tasksForTodolist = tasks[mapTodolists.id];
-
-                        if (mapTodolists.filter === "active") {
-                            tasksForTodolist = tasks[mapTodolists.id].filter(t => t.isDone === false);
-                        }
-                        if (mapTodolists.filter === "completed") {
-                            tasksForTodolist = tasks[mapTodolists.id].filter(t => t.isDone === true);
-                        }
                         return (
                             <Todolist
-                                removeTodoList={removeTodoList}
                                 key={mapTodolists.id}
-                                todolistID={mapTodolists.id}
                                 title={mapTodolists.title}
-                                tasks={tasksForTodolist}
-                                removeTask={removeTask}
-                                changeFilter={changeFilter}
-                                addTask={addTask}
-                                changeTaskStatus={changeStatus}
                                 filter={mapTodolists.filter}
-                                changeTaskTitle={changeTaskTitle}
-                                editTodolist={editTodolist}
+                                id={mapTodolists.id}
                             />
                         )
                     })}

@@ -1,7 +1,7 @@
 
 import { v1 } from "uuid";
 import { ObjTaskType } from "../Todolist"
-import { removeTodoListACType,changeFilterAC, addTodolistACType} from "./TodolistReduser";
+import { removeTodoListACType,changeFilterAC, addTodolistACType} from "./TodoListReduser";
 
 export const initialState : ObjTaskType = {}
 

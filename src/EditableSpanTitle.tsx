@@ -2,7 +2,7 @@ import React, { KeyboardEvent,ChangeEvent, useState } from "react";
 
 type EditableSpanTitlePropsType = {
     title:string
-    addTask:(newTitle:string)=>void
+    onChange:(newTitle:string)=>void
 }
 
 export const EditableSpanTitle = (props:EditableSpanTitlePropsType) => {
@@ -19,14 +19,14 @@ export const EditableSpanTitle = (props:EditableSpanTitlePropsType) => {
     
     const EditTrueHandler = () => {
         setEdit(!edit)
-        props.addTask(newTitle)
+        props.onChange(newTitle)
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         
         if (e.key === "Enter") {
             setEdit(!edit)
-            props.addTask(newTitle);
+            props.onChange(newTitle);
 
         }
     }
