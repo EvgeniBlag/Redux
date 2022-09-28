@@ -1,55 +1,64 @@
 import { Button, Checkbox,IconButton } from "@material-ui/core";
 import { Delete } from "@material-ui/icons";
 import React, { ChangeEvent } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { EditableSpan } from "./EditableSpan";
-import { TaskType } from './Todolist'
+import { changeStatusAC, changeTaskTitleAC, removeTaskAC } from "./redusers/TasksReduser";
+import { AppRootStateType } from "./store";
+import { ObjTaskType, TaskType } from './Todolist'
 
 type TaskPropsType = {
-    changeStatusTask:(taskId:string, status:boolean)=>void
-    removeHandler:(id: string)=>void
+    key:string
     task:TaskType
     todolistID: string
-    onChangeTaskTitleHandler: (title:string)=> void
 }
 
 
-export const Task = (props:TaskPropsType) => {
+export const Task = ({key,task,todolistID}:TaskPropsType) => {
+
+    const dispatch = useDispatch()
+
 
     const deleteTaskHandler = ()=> {
-        props.removeHandler(props.task.id)
+        // props.removeHandler(props.task.id)
+        dispatch(removeTaskAC(todolistID,task.id))
     }
 
-    const changeStatusHandler = (e: ChangeEvent<HTMLInputElement>)=> {
-        props.changeStatusTask(props.task.id, e.currentTarget.checked )
+    const changeStatusHandler = (event:ChangeEvent<HTMLInputElement>)=> {
+        const isDone = event.target.checked
+        // props.changeStatusTask(props.task.id, e.currentTarget.checked )
+        dispatch(changeStatusAC(todolistID, task.id, isDone));
     }
 
-    const changeTaskTitle = (title: string) => {
-        props.onChangeTaskTitleHandler(title)
+   
+
+    const changeTaskTitle = ( newTitle: string ) => {
+        // props.onChangeTaskTitleHandler(title)
+        dispatch(changeTaskTitleAC(task.id, newTitle, todolistID))
     }
 
     return (
-       <div>
-        <div key={props.task.id} className={props.task.isDone ? "is-done" : ""}>
+      <div>
+        <div className={task.isDone ? "is-done" : ""}>
 
-                <Checkbox
-                    checked={props.task.isDone}
-                    onChange={changeStatusHandler}
-                /> 
+          <Checkbox
+           checked={task.isDone}
+            onChange={changeStatusHandler}
+             />
 
-              
-       
-                <EditableSpan
-                    old_title={props.task.title}
-                    changeItemText={(title: string) => changeTaskTitle(title)}
-                />
+          <EditableSpan
+           old_title={task.title}
+            changeItemText={changeTaskTitle}
+             />
 
-                <IconButton onClick={deleteTaskHandler}>
-                    <Delete />
-                </IconButton>
-    </div>
-    </div>
-   
-    )
+          <IconButton
+           onClick={deleteTaskHandler}
+           >
+            <Delete />
+          </IconButton>
+        </div>
+      </div>
+    );
 }
 
 

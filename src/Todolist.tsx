@@ -25,8 +25,6 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-
-
 export type TaskType = {
     id: string
     title: string
@@ -92,20 +90,6 @@ export function Todolist({filter, id, title}: todolistsType) {
 
     
 
-    function changeTaskStatus(todolistID: string, taskId: string, isDone: boolean) {
-        dispatch(changeStatusAC(todolistID, taskId, isDone));
-    }
-
-    const changeTaskTitle = (taskId: string, newTitle: string, todolistId: string) => {
-        // dispatchTasks({...tasks,[todolistId]:tasks[todolistId].map(el=>el.id===taskId?{...el,title:newTitle}:el)})
-        dispatch(changeTaskTitleAC(taskId, newTitle, todolistId))
-    }
-
-    const removeTask =(todolistID: string, id: string)=> {
-
-        //   setTasks({...tasks,[todolistID]:tasks[todolistID].filter(t=>t.id != id)});
-        dispatch(removeTaskAC(todolistID, id))
-    }
 
     return (
         <Grid item>
@@ -114,7 +98,6 @@ export function Todolist({filter, id, title}: todolistsType) {
                     <div style={{ display: "flex" }}>
                         <h3>
                             <EditableSpanTitle
-
                              title={title}
                              onChange={setTaskTitle}
                             />
@@ -148,19 +131,11 @@ export function Todolist({filter, id, title}: todolistsType) {
                 <div>
                     {
                         tasksForTodolist.map(t => {
-                            const removeHandler = (taskId: string) => removeTask(id, t.id)
-
-                            const changeStatusTask = (taskId: string, status: boolean) => {
-                              changeTaskStatus(id, taskId, status);
-                            }
-
                             return (
                                 <Task
-                                    changeStatusTask={changeStatusTask}
-                                    removeHandler={removeHandler}
+                                    key={t.id}
                                     task={t}
                                     todolistID={id}
-                                    onChangeTaskTitleHandler={(title: string) => changeTaskTitle(t.id, taskTitle, id)}
                                 />
                             )
                         })
