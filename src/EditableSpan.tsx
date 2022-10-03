@@ -1,5 +1,5 @@
 import { TextField } from "@material-ui/core";
-import React, { useState, ChangeEvent,KeyboardEvent } from "react";
+import React, { useState, ChangeEvent,KeyboardEvent, memo } from "react";
 
 
 type EditableSpanPropsType = {
@@ -8,17 +8,22 @@ type EditableSpanPropsType = {
 }
 
 
-export const EditableSpan = ({old_title,changeItemText}:EditableSpanPropsType) => {
-    let [editMode,setEditMode] = useState(false);
-    let [title,setTitle] = useState(old_title);
+export const EditableSpan = memo(({old_title,changeItemText}:EditableSpanPropsType) => {
+
+    console.log('EditableSpan')
+
+    let [editMode,setEditMode] = useState<boolean>(false);
+    let [title,setTitle] = useState<string>('');
 
     const activeEditMode = () => {
-        setEditMode(!editMode);
-        setTitle(old_title);
+        setEditMode(true);
+        if(old_title) {
+            setTitle(old_title);
+        }
     }
 
     const activateViewMode = () => {
-        setEditMode(!editMode);
+        setEditMode(false);
         changeItemText(title)
     }
 
@@ -27,13 +32,11 @@ export const EditableSpan = ({old_title,changeItemText}:EditableSpanPropsType) =
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        
         if (e.key === "Enter") {
-            setEditMode(!editMode)
-            changeItemText(title);
-
+            activateViewMode()
         }
     }
+
     return(
          editMode
           ?
@@ -41,4 +44,4 @@ export const EditableSpan = ({old_title,changeItemText}:EditableSpanPropsType) =
            :
            <span onDoubleClick={activeEditMode}>{old_title}</span>
     )
-}
+})

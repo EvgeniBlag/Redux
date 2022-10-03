@@ -1,15 +1,17 @@
-import React, { KeyboardEvent,ChangeEvent, useState } from "react";
+import React, { KeyboardEvent,ChangeEvent, useState, memo } from "react";
 
 type EditableSpanTitlePropsType = {
     title:string
     onChange:(newTitle:string)=>void
 }
 
-export const EditableSpanTitle = (props:EditableSpanTitlePropsType) => {
+export const EditableSpanTitle = memo (({title,onChange}:EditableSpanTitlePropsType) => {
 
-    const [newTitle,setNewTitle]=useState(props.title)
+    console.log('EditableSpanTitle')
+
+    const [newTitle,setNewTitle]=useState<string>(title)
     let [error, setError] = useState<string | null>(null)
-    const [edit, setEdit] = useState(false)
+    const [edit, setEdit] = useState<boolean>(false)
    
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -19,14 +21,14 @@ export const EditableSpanTitle = (props:EditableSpanTitlePropsType) => {
     
     const EditTrueHandler = () => {
         setEdit(!edit)
-        props.onChange(newTitle)
+        onChange(newTitle)
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         
         if (e.key === "Enter") {
             setEdit(!edit)
-            props.onChange(newTitle);
+            onChange(newTitle);
         }
     }
 
@@ -44,7 +46,7 @@ export const EditableSpanTitle = (props:EditableSpanTitlePropsType) => {
          :
             <span
              onDoubleClick={EditTrueHandler} >
-                {props.title}
+                {title}
             </span>
     )
-}
+})

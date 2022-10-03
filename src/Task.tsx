@@ -8,13 +8,13 @@ import { AppRootStateType } from "./store";
 import { ObjTaskType, TaskType } from './Todolist'
 
 type TaskPropsType = {
-    key:string
+   
     task:TaskType
     todolistID: string
 }
 
 
-export const Task = ({key,task,todolistID}:TaskPropsType) => {
+export const Task = ({task,todolistID}:TaskPropsType) => {
 
     const dispatch = useDispatch()
 

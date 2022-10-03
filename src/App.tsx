@@ -52,7 +52,7 @@ function App() {
     // });
 
    let todolists = useSelector < AppRootStateType, Array<todolistsType> > ( state => state.todolists)
-    // let tasks = useSelector < AppRootStateType, ObjTaskType > ( state => state.tasks)
+    let tasks = useSelector < AppRootStateType, ObjTaskType > ( state => state.tasks)
 
     const dispatch = useDispatch()
 

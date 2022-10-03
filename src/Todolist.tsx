@@ -5,6 +5,7 @@ import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import {FilterValuesType, todolistsType} from './App';
+import { EditableSpan } from './EditableSpan';
 import { EditableSpanTitle } from './EditableSpanTitle';
 import { addTaskAC, changeStatusAC, changeTaskTitleAC, removeTaskAC } from './redusers/TasksReduser';
 import { changeFilterAC, editTodolistAC, removeTodoListAC } from './redusers/TodoListReduser';
@@ -90,7 +91,8 @@ export function Todolist({filter, id, title}: todolistsType) {
     const onCompletedClickHandler = () => changeFilter('completed')
 
 
-    
+
+
 
 
     return (
@@ -98,12 +100,10 @@ export function Todolist({filter, id, title}: todolistsType) {
             <Paper elevation={3} style={{ padding: "10px" }}>
                 <div>
                     <div style={{ display: "flex" }}>
-                        <h3>
-                            <EditableSpanTitle
-                             title={title}
-                             onChange={setTaskTitle}
-                            />
-                        </h3>
+                        <h4>
+                             <EditableSpan old_title={title} changeItemText={editTodolist}/>
+                                                        
+                        </h4>
 
                         <IconButton onClick={removeTodoList} >
                             <Delete />
