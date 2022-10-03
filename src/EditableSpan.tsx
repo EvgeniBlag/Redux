@@ -8,18 +8,18 @@ type EditableSpanPropsType = {
 }
 
 
-export const EditableSpan = (props:EditableSpanPropsType) => {
+export const EditableSpan = ({old_title,changeItemText}:EditableSpanPropsType) => {
     let [editMode,setEditMode] = useState(false);
-    let [title,setTitle] = useState(props.old_title);
+    let [title,setTitle] = useState(old_title);
 
     const activeEditMode = () => {
         setEditMode(!editMode);
-        setTitle(props.old_title);
+        setTitle(old_title);
     }
 
     const activateViewMode = () => {
         setEditMode(!editMode);
-        props.changeItemText(title)
+        changeItemText(title)
     }
 
     const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
@@ -30,7 +30,7 @@ export const EditableSpan = (props:EditableSpanPropsType) => {
         
         if (e.key === "Enter") {
             setEditMode(!editMode)
-            props.changeItemText(title);
+            changeItemText(title);
 
         }
     }
@@ -39,6 +39,6 @@ export const EditableSpan = (props:EditableSpanPropsType) => {
           ?
            <TextField onKeyDown={onKeyPressHandler} value={title} onChange={changeTitle} autoFocus onBlur={activateViewMode}/>
            :
-           <span onDoubleClick={activeEditMode}>{props.old_title}</span>
+           <span onDoubleClick={activeEditMode}>{old_title}</span>
     )
 }

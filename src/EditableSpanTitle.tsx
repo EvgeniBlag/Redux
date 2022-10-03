@@ -27,7 +27,6 @@ export const EditableSpanTitle = (props:EditableSpanTitlePropsType) => {
         if (e.key === "Enter") {
             setEdit(!edit)
             props.onChange(newTitle);
-
         }
     }
 

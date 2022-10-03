@@ -52,7 +52,7 @@ function App() {
     // });
 
    let todolists = useSelector < AppRootStateType, Array<todolistsType> > ( state => state.todolists)
-   let tasks = useSelector < AppRootStateType, ObjTaskType > ( state => state.tasks)
+    // let tasks = useSelector < AppRootStateType, ObjTaskType > ( state => state.tasks)
 
     const dispatch = useDispatch()
 
@@ -63,7 +63,6 @@ function App() {
     }
 
     const addTodolist = () => {
-
         const newId = v1();
         const newTodolist: todolistsType = { id: newId, title: titleTodoList, filter: 'all' }
         // dispatchTodoList([newTodolist, ...todolists])
@@ -109,7 +108,7 @@ function App() {
 
 
                 <Grid container spacing={8} style={{ padding: "30px" }}>
-                    
+
                     {todolists.map((mapTodolists: todolistsType) => {
                         return (
                             <Todolist

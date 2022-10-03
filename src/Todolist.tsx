@@ -48,6 +48,7 @@ export function Todolist({filter, id, title}: todolistsType) {
 
     const addTask = () => {
      dispatch(addTaskAC(id,taskTitle))
+     setTaskTitle('')
     }
 
     const removeTodoList = () => dispatch(removeTodoListAC(id))
@@ -71,6 +72,7 @@ export function Todolist({filter, id, title}: todolistsType) {
         setError(null);
         if (e.key === "Enter") {
             addTask();
+        
         }
     }
 
