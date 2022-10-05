@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState, useReducer } from 'react';
+import React, { ChangeEvent, useState, useReducer, useCallback } from 'react';
 import { ObjTaskType, Todolist } from './Todolist';
 import { v1 } from 'uuid';
 import { Container, Grid, IconButton, TextField } from '@material-ui/core';
@@ -52,17 +52,15 @@ function App() {
     // });
 
    let todolists = useSelector < AppRootStateType, Array<todolistsType> > ( state => state.todolists)
-    let tasks = useSelector < AppRootStateType, ObjTaskType > ( state => state.tasks)
+    // let tasks = useSelector < AppRootStateType, ObjTaskType > ( state => state.tasks)
 
     const dispatch = useDispatch()
 
     const addNewTitleTodolist = (e: ChangeEvent<HTMLInputElement>) => {
-
         setTitleTodolist(e.currentTarget.value)
-
     }
 
-    const addTodolist = () => {
+    const addTodolist = useCallback(() => {
         const newId = v1();
         const newTodolist: todolistsType = { id: newId, title: titleTodoList, filter: 'all' }
         // dispatchTodoList([newTodolist, ...todolists])
@@ -73,8 +71,8 @@ function App() {
         //         { id: v1(), title: "Rest API2", isDone: false },]
         // })
         dispatch(addTodolistAC(newTodolist))
-        setTitleTodolist("")
-    }
+     setTitleTodolist("")
+    },[])
 
 
     const editTodolist = (todolistId: string, newTitle: string) => {

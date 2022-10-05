@@ -1,12 +1,11 @@
 import { Button, Grid, IconButton, makeStyles, Paper, TextField, Theme , createStyles } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
 import AddBoxIcon from '@material-ui/icons/AddBox';
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, useCallback, useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import {FilterValuesType, todolistsType} from './App';
 import { EditableSpan } from './EditableSpan';
-import { EditableSpanTitle } from './EditableSpanTitle';
 import { addTaskAC, changeStatusAC, changeTaskTitleAC, removeTaskAC } from './redusers/TasksReduser';
 import { changeFilterAC, editTodolistAC, removeTodoListAC } from './redusers/TodoListReduser';
 import { AppRootStateType } from './store';
@@ -40,6 +39,8 @@ export function Todolist({filter, id, title}: todolistsType) {
         const classes = useStyles();
 
     let [taskTitle, setTaskTitle] = useState("")
+    console.log('taskTitle', taskTitle);
+    
     let [error, setError] = useState<string | null>(null)
 
     const tasks = useSelector<AppRootStateType,Array<TaskType>>(state => state.tasks[id])
@@ -47,7 +48,7 @@ export function Todolist({filter, id, title}: todolistsType) {
     const dispatch = useDispatch()
 
 
-    const addTask = () => {
+    const addTask =   () => {
      dispatch(addTaskAC(id,taskTitle))
      setTaskTitle('')
     }
@@ -89,10 +90,6 @@ export function Todolist({filter, id, title}: todolistsType) {
     const onAllClickHandler = () =>  changeFilter('all')
     const onActiveClickHandler = () => changeFilter('active')
     const onCompletedClickHandler = () => changeFilter('completed')
-
-
-
-
 
 
     return (
