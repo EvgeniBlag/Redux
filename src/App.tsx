@@ -60,25 +60,25 @@ function App() {
         setTitleTodolist(e.currentTarget.value)
     }
 
-    const addTodolist = useCallback(() => {
-        const newId = v1();
-        const newTodolist: todolistsType = { id: newId, title: titleTodoList, filter: 'all' }
-        // dispatchTodoList([newTodolist, ...todolists])
-        // dispatchTasks({...tasks, [newId]: [
-        //         { id: v1(), title: "HTML&CSS2", isDone: true },
-        //         { id: v1(), title: "JS2", isDone: true },
-        //         { id: v1(), title: "ReactJS2", isDone: false },
-        //         { id: v1(), title: "Rest API2", isDone: false },]
-        // })
-        dispatch(addTodolistAC(newTodolist))
-     setTitleTodolist("")
-    },[])
-
-
-    const editTodolist = (todolistId: string, newTitle: string) => {
-        // setTodolists(todolists.map(el=>el.id===todolistId?{...el,title:newTitle}:el))
-        dispatch(editTodolistAC(todolistId, newTitle))
+    const addTodolist = () => {
+      const newId = v1();
+      const newTodolist: todolistsType = { id: newId, title: titleTodoList, filter: "all" };
+      // dispatchTodoList([newTodolist, ...todolists])
+      // dispatchTasks({...tasks, [newId]: [
+      //         { id: v1(), title: "HTML&CSS2", isDone: true },
+      //         { id: v1(), title: "JS2", isDone: true },
+      //         { id: v1(), title: "ReactJS2", isDone: false },
+      //         { id: v1(), title: "Rest API2", isDone: false },]
+      // })
+      dispatch(addTodolistAC(newTodolist));
+      setTitleTodolist("");
     }
+
+
+    // const editTodolist = (todolistId: string, newTitle: string) => {
+    //     // setTodolists(todolists.map(el=>el.id===todolistId?{...el,title:newTitle}:el))
+    //     dispatch(editTodolistAC(todolistId, newTitle))
+    // }
 
     return (
         <div>
@@ -101,9 +101,6 @@ function App() {
                     </IconButton>
                     <h4 style={{ color: "green" }}> //Este campo , esta para añadir un bloque nuevo.</h4>
                 </div>
-
-
-
 
                 <Grid container spacing={8} style={{ padding: "30px" }}>
 

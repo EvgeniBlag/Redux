@@ -1,7 +1,7 @@
 import { Button, Grid, IconButton, makeStyles, Paper, TextField, Theme , createStyles } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
 import AddBoxIcon from '@material-ui/icons/AddBox';
-import React, {ChangeEvent, KeyboardEvent, useCallback, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, memo, useCallback, useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import {FilterValuesType, todolistsType} from './App';
@@ -34,12 +34,12 @@ export type ObjTaskType = {
     [key: string] : TaskType[],
 }
 
-export function Todolist({filter, id, title}: todolistsType) {
+export const Todolist = memo(({filter, id, title}: todolistsType) => {
 
         const classes = useStyles();
 
     let [taskTitle, setTaskTitle] = useState("")
-    console.log('taskTitle', taskTitle);
+   
     
     let [error, setError] = useState<string | null>(null)
 
@@ -53,11 +53,13 @@ export function Todolist({filter, id, title}: todolistsType) {
      setTaskTitle('')
     }
 
-    const removeTodoList = () => dispatch(removeTodoListAC(id))
+    const removeTodoList = () =>{ 
+     dispatch(removeTodoListAC(id))
+    }
 
-     const editTodolist=(newTitle:string)=>{
+     const editTodolist= useCallback((newTitle:string)=>{
       dispatch(editTodolistAC( id,newTitle))
-     }
+     },[dispatch])
 
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -65,7 +67,6 @@ export function Todolist({filter, id, title}: todolistsType) {
     }
 
     function changeFilter(value: FilterValuesType) {
-        console.log(value)
         // setTodolists(todolists.map(filtered=>filtered.id===todolistID ? {...filtered,filter:value}:filtered))
         dispatch(changeFilterAC(id, value))
     }
@@ -74,7 +75,6 @@ export function Todolist({filter, id, title}: todolistsType) {
         setError(null);
         if (e.key === "Enter") {
             addTask();
-        
         }
     }
 
@@ -83,6 +83,7 @@ export function Todolist({filter, id, title}: todolistsType) {
     if (filter === "active") {
         tasksForTodolist = tasks.filter(t => t.isDone === false);
     }
+
     if (filter === "completed") {
         tasksForTodolist = tasks.filter(t => t.isDone === true);
     }
@@ -97,9 +98,9 @@ export function Todolist({filter, id, title}: todolistsType) {
             <Paper elevation={3} style={{ padding: "10px" }}>
                 <div>
                     <div style={{ display: "flex" }}>
+
                         <h4>
-                             <EditableSpan old_title={title} changeItemText={editTodolist}/>
-                                                        
+                             <EditableSpan old_title={title} changeItemText={editTodolist}/>                         
                         </h4>
 
                         <IconButton onClick={removeTodoList} >
@@ -165,4 +166,4 @@ export function Todolist({filter, id, title}: todolistsType) {
             </Paper > 
             </Grid>
     )
-}
+})

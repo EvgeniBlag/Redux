@@ -1,6 +1,6 @@
 import { Button, Checkbox,IconButton } from "@material-ui/core";
 import { Delete } from "@material-ui/icons";
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { EditableSpan } from "./EditableSpan";
 import { changeStatusAC, changeTaskTitleAC, removeTaskAC } from "./redusers/TasksReduser";
@@ -14,8 +14,8 @@ type TaskPropsType = {
 }
 
 
-export const Task = ({task,todolistID}:TaskPropsType) => {
-
+export const Task = memo(({task,todolistID}:TaskPropsType) => {
+console.log('Task')
     const dispatch = useDispatch()
 
 
@@ -59,6 +59,6 @@ export const Task = ({task,todolistID}:TaskPropsType) => {
         </div>
       </div>
     );
-}
+})
 
 
