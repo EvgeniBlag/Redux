@@ -8,6 +8,7 @@ import { addTaskAC, changeStatusAC, changeTaskTitleAC, removeTaskAC, tasksReduce
 import { editTodolistAC, removeTodoListAC, todolistsReduser, changeFilterAC, addTodolistAC } from './redusers/TodoListReduser';
 import { AppRootStateType } from './store';
 import { useDispatch, useSelector } from 'react-redux';
+import { Clock } from './Clock';
 
 
 
@@ -99,6 +100,7 @@ function App() {
                         color={'primary'}>
                         < AddBoxIcon />
                     </IconButton>
+                    
                     <h4 style={{ color: "green" }}> //Este campo , esta para añadir un bloque nuevo.</h4>
                 </div>
 

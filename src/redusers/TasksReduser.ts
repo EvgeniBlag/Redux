@@ -21,6 +21,7 @@ export const tasksReducer = (state = initialState, action: tsarACType): ObjTaskT
          const taskId = v1()
          // setTasks({...tasks,[todolistID]: [newTask, ...tasks[todolistID]]});
          let newTask = { id: taskId, title: action.payload.title, isDone: false };
+         
          return { ...state, [action.payload.todolistID]: [newTask, ...state[action.payload.todolistID]] }
       }
 
