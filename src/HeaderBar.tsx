@@ -2,7 +2,7 @@
 import { AppBar, Button, IconButton, Toolbar, Typography  } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Clock } from './Clock';
+/* import { Clock } from './Clock'; */
 
 
 
@@ -33,7 +33,7 @@ export const HeaderBar = () => {
             <Typography variant="h6" className={classes.title}>
                <h3 style={{color:"red",fontFamily:"Splash"}}> Todo List Project</h3>
             </Typography>
-            <Clock/>
+      {/*       <Clock/> */}
             <Button color="inherit">Login</Button>
         </Toolbar>
     </AppBar> 

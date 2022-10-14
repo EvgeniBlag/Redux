@@ -8,7 +8,7 @@ import { addTaskAC, changeStatusAC, changeTaskTitleAC, removeTaskAC, tasksReduce
 import { editTodolistAC, removeTodoListAC, todolistsReduser, changeFilterAC, addTodolistAC } from './redusers/TodoListReduser';
 import { AppRootStateType } from './store';
 import { useDispatch, useSelector } from 'react-redux';
-import { Clock } from './Clock';
+/* import { Clock } from './Clock'; */
 
 
 
