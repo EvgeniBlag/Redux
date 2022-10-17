@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
- export const Clock = () => {
+/*  export const Clock = () => {
 
 const [date,setDate]=useState(new Date())
 
@@ -21,4 +21,4 @@ return (
     <span>{date.getSeconds()}</span>
   </div>
 );
-} 
+}  */
